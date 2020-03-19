@@ -1,13 +1,10 @@
 import Vue from 'vue'
-// import Vuex from 'vuex'
 import App from './App.vue'
+import router from './router'
 
-Vue.config.productionTip = false
-
-/*const store = new Vuex.Store({
-
-});*/
+Vue.config.productionTip = false;
 
 new Vue({
+  router,
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');
