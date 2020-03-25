@@ -8,19 +8,22 @@
       <button v-else @click="login">Войти</button>
     </div>
 
-    <p>App.vue auth value: {{ auth }}</p>
+    <a @click="recursionTest" href="#">Test recursion</a>
 
     <router-view />
   </div>
 </template>
 
 <script>
+  const axios = require('axios').default;
+
   export default {
     name: 'App',
     components: {},
     data: function() {
       return {
-        auth: null
+        auth: null,
+        pingResult: null
       }
     },
     mounted() {
@@ -37,6 +40,33 @@
         this.auth = true;
         this.$sessionStorage.set('auth', true);
       },
+      ping: function(timeout) {
+        let _this = this;
+
+        return new Promise(function(resolve/*, reject*/) {
+          setTimeout(async () => {
+
+            try {
+              await axios.get('/').then(() => {
+                _this.pingResult = true;
+                console.log('in ping true', _this.pingResult);
+                return resolve();
+              });
+            } catch (e) {
+              console.log('in ping false', _this.pingResult);
+              return resolve(_this.ping(timeout));
+            }
+
+          }, timeout);
+        });
+      },
+      recursionTest: async function() {
+        let _this = this;
+
+        this.ping(6000).then(function(){
+          console.log('after ping', _this.pingResult);
+        });
+      }
     }
   }
 </script>
