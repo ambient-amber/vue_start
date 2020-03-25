@@ -1,16 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/product">Product</router-link>
+    <v-app dark>
+      <v-app-bar class="appBar" app>
 
-      <button v-if="auth" @click="exit">Выйти</button>
-      <button v-else @click="login">Войти</button>
-    </div>
+        <v-tabs>
+          <v-tab to="/">Система</v-tab>
+          <v-tab to="/terminal">Терминал</v-tab>
+        </v-tabs>
 
-    <a @click="recursionTest" href="#">Test recursion</a>
+        <router-link to="/">Home</router-link>
+        <router-link to="/product">Product</router-link>
 
-    <router-view />
+        <a @click="recursionTest" href="#">Test recursion</a>
+
+        <v-spacer/>
+
+      </v-app-bar>
+
+      <v-content>
+        <v-container fluid class=" container_fluid">
+          <router-view></router-view>
+        </v-container>
+      </v-content>
+
+    </v-app>
+
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -23,7 +40,8 @@
     data: function() {
       return {
         auth: null,
-        pingResult: null
+        pingResult: null,
+        overlay: false
       }
     },
     mounted() {
@@ -72,12 +90,16 @@
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+
+  .container_fluid {
+    height: 100%;
+  }
 </style>
