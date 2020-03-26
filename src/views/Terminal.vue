@@ -29,7 +29,7 @@
             </v-card>
         </div>
 
-        <v-row>
+        <v-row class="bottom_buttons pl-3 pr-3">
             <v-col cols="4"></v-col>
             <v-col cols="4">
                 <div class="saveButton">
@@ -38,7 +38,7 @@
             </v-col>
             <v-col cols="4">
                 <div class="saveButton text-right">
-                    <v-btn bottom color="primary" @click="$emit('ping', 3)">Reboot</v-btn>
+                    <v-btn bottom color="primary" @click="$emit('recursionTest')">Reboot</v-btn>
                 </div>
             </v-col>
         </v-row>
@@ -57,7 +57,7 @@
         },
         methods: {
             send: async function () {
-            }
+            },
         }
     }
 </script>

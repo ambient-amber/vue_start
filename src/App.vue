@@ -19,7 +19,7 @@
 
       <v-content>
         <v-container fluid class=" container_fluid">
-          <router-view></router-view>
+          <router-view v-on:recursionTest="recursionTest"></router-view>
         </v-container>
       </v-content>
 
@@ -61,7 +61,7 @@
       ping: function(timeout) {
         let _this = this;
 
-        return new Promise(function(resolve/*, reject*/) {
+        return new Promise(function(resolve) {
           setTimeout(async () => {
 
             try {
@@ -101,5 +101,9 @@
 
   .container_fluid {
     height: 100%;
+  }
+
+  .bottom_buttons {
+    padding-top: 5%;
   }
 </style>
